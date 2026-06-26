@@ -15,7 +15,7 @@ public class FelineKittensParameterizedTest {
         this.kittensCount = kittensCount;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные: {0}")
     public static Object[][] data() {
         return new Object[][]{
                 {0},
@@ -27,6 +27,7 @@ public class FelineKittensParameterizedTest {
     @Test
     public void getKittensWithArgumentReturnsPassedValue() {
         Feline feline = new Feline();
+
         assertEquals(kittensCount, feline.getKittens(kittensCount));
     }
 }
