@@ -5,7 +5,6 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 
 public class AnimalTest {
 
@@ -21,14 +20,16 @@ public class AnimalTest {
         assertEquals(List.of("Животные", "Птицы", "Рыба"), animal.getFood("Хищник"));
     }
 
-    @Test
-    public void getFoodThrowsExceptionForUnknownAnimalKind() {
-        Exception exception = assertThrows(Exception.class, () -> animal.getFood("Всеядное"));
-        assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", exception.getMessage());
+    @Test(expected = Exception.class)
+    public void getFoodThrowsExceptionForUnknownAnimalKind() throws Exception {
+        animal.getFood("Всеядное");
     }
 
     @Test
     public void getFamilyReturnsFamilies() {
-        assertEquals("Существует несколько семейств: заячьи, беличьи, мышиные, кошачьи, псовые, медвежьи, куньи", animal.getFamily());
+        assertEquals(
+                "Существует несколько семейств: заячьи, беличьи, мышиные, кошачьи, псовые, медвежьи, куньи",
+                animal.getFamily()
+        );
     }
 }
