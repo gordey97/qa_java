@@ -5,29 +5,31 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 @RunWith(Parameterized.class)
-public class FelineKittensParameterizedTest {
+public class LionManeParameterizedTest {
 
-    private final int kittensCount;
+    private final String sex;
+    private final boolean hasMane;
 
-    public FelineKittensParameterizedTest(int kittensCount) {
-        this.kittensCount = kittensCount;
+    public LionManeParameterizedTest(String sex, boolean hasMane) {
+        this.sex = sex;
+        this.hasMane = hasMane;
     }
 
-    @Parameterized.Parameters(name = "Тестовые данные: {0}")
+    @Parameterized.Parameters(name = "Тестовые данные: {0}, {1}")
     public static Object[][] data() {
         return new Object[][]{
-                {0},
-                {1},
-                {3}
+                {"Самец", true},
+                {"Самка", false}
         };
     }
 
     @Test
-    public void getKittensWithArgumentReturnsPassedValue() {
-        Feline feline = new Feline();
+    public void doesHaveManeReturnsExpectedValue() throws Exception {
+        Lion lion = new Lion(sex, mock(Feline.class));
 
-        assertEquals(kittensCount, feline.getKittens(kittensCount));
+        assertEquals(hasMane, lion.doesHaveMane());
     }
 }
